@@ -1,6 +1,6 @@
 {
   "name": "agentcomposerui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Composer UI Components for AI Agents — React & Tailwind CSS",
   "keywords": [
     "agent",
