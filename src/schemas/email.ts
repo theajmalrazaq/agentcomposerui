@@ -39,6 +39,4 @@ export type EmailDraftData = z.infer<typeof emailDraftSchema>;
  * Standard JSON Schema for OpenAI / Anthropic / Gemini function calling.
  * Pass this directly as `parameters` in your tool definition.
  */
-export const emailDraftJsonSchema = zodToJsonSchema(emailDraftSchema, {
-  target: "openAi",
-});
+export const emailDraftJsonSchema = zodToJsonSchema(emailDraftSchema);
