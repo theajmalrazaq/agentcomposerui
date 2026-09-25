@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentComposerUI — Composer UI Components for AI Agents</title>
+  <meta name="description"
+    content="Production-ready, human-in-the-loop composer UI components for AI agents. Native React & Tailwind CSS cards with streaming, inline review, and LLM tool schemas." />
+  <meta name="keywords"
+    content="ai agents, react, tailwindcss, copilotkit, vercel ai sdk, assistant-ui, human in the loop, hitl, linkedin composer, tool schema, generative ui" />
+  <meta property="og:title" content="AgentComposerUI — Composer UI Components for AI Agents" />
+  <meta property="og:description"
+    content="Production-ready, human-in-the-loop composer UI components for AI agents in React and Tailwind CSS." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <meta property="og:image" content="/logo.svg" />
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <script>
+    (function () {
+      try {
+        var legacy = localStorage.getItem("acu-theme");
+        if (legacy === "dark") {
+          localStorage.removeItem("acu-theme");
+        }
+        var stored = localStorage.getItem("agentcomposerui-theme");
+        if (stored === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } catch (_) { }
+    })();
+  </script>
+</head>
+
+<body
+  class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased selection:bg-blue-500/20 selection:text-blue-500">
+  <div id="root"></div>
+  <script type="module" src="/site/main.tsx"></script>
+</body>
+
+</html>

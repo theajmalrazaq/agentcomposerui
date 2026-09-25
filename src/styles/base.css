@@ -1,0 +1,47 @@
+/* AgentComposerUI Base Design System Tokens (Monochrome / Black & White / ReUI Aesthetic) */
+
+:root {
+  /* Surface & Text */
+  --acu-background: 0 0% 100%;
+  --acu-foreground: 240 10% 3.9%;
+
+  /* Brand / Action (Black in light mode) */
+  --acu-primary: 240 5.9% 10%;
+  --acu-primary-foreground: 0 0% 98%;
+
+  /* Muted & Borders */
+  --acu-muted: 240 4.8% 95.9%;
+  --acu-muted-foreground: 240 3.8% 46.1%;
+  --acu-border: 240 5.9% 90%;
+  --acu-ring: 240 5.9% 10%;
+
+  /* Feedback States */
+  --acu-destructive: 0 84.2% 60.2%;
+  --acu-success: 142.1 76.2% 36.3%;
+
+  /* Geometry */
+  --acu-radius: 0.75rem;
+
+  /* Animation */
+  --acu-stream-speed: 40ms;
+}
+
+.dark {
+  /* Surface & Text (Deep zinc-950, zero blue tint) */
+  --acu-background: 240 10% 3.9%;
+  --acu-foreground: 0 0% 98%;
+
+  /* Brand / Action (Pure crisp white in dark mode) */
+  --acu-primary: 0 0% 98%;
+  --acu-primary-foreground: 240 10% 3.9%;
+
+  /* Muted & Borders (Zero blue tint) */
+  --acu-muted: 240 3.7% 15.9%;
+  --acu-muted-foreground: 240 5% 64.9%;
+  --acu-border: 240 3.7% 15.9%;
+  --acu-ring: 0 0% 98%;
+
+  /* Feedback States */
+  --acu-destructive: 0 62.8% 30.6%;
+  --acu-success: 142 71% 35%;
+}

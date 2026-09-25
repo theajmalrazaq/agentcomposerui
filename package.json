@@ -1,0 +1,89 @@
+{
+  "name": "agentcomposerui",
+  "version": "0.1.0",
+  "description": "Composer UI Components for AI Agents — React & Tailwind CSS",
+  "keywords": [
+    "agent",
+    "ai",
+    "anthropic",
+    "composer",
+    "email",
+    "gemini",
+    "generative-ui",
+    "human-in-the-loop",
+    "linkedin",
+    "openai",
+    "react",
+    "tailwindcss",
+    "twitter"
+  ],
+  "homepage": "https://github.com/theajmalrazaq/agentcomposerui#readme",
+  "bugs": {
+    "url": "https://github.com/theajmalrazaq/agentcomposerui/issues"
+  },
+  "license": "MIT",
+  "author": "theajmalrazaq",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theajmalrazaq/agentcomposerui.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "site:dev": "vite",
+    "site:build": "vite build --outDir dist-site",
+    "site:preview": "vite preview --outDir dist-site",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bun run typecheck && bun run build"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^3.24.2",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "autoprefixer": "^10.6.1",
+    "framer-motion": "^13.4.3",
+    "jsdom": "^30.1.1",
+    "lucide-react": "^1.48.0",
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.85.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.7.3",
+    "vitest": "^5.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}
