@@ -1,6 +1,6 @@
 {
   "name": "agentcomposerui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Composer UI Components for AI Agents — React & Tailwind CSS",
   "keywords": [
     "agent",
@@ -38,6 +38,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./schemas": {
+      "types": "./dist/schemas.d.ts",
+      "import": "./dist/schemas.js",
+      "require": "./dist/schemas.cjs"
     },
     "./styles.css": "./dist/styles.css"
   },
