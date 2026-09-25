@@ -41,6 +41,7 @@ import type { EmailDraftData } from "../../src/schemas/email";
 import type { GitHubPRData } from "../../src/schemas/github";
 import type { ComposerStatus } from "../../src/types";
 import type { DocSlug, DocSection } from "../types";
+import { CodeBlock } from "./CodeBlock";
 
 interface DocsViewProps {
   activeSlug: DocSlug;
@@ -59,10 +60,10 @@ const DOC_SECTIONS: DocSection[] = [
   {
     title: "Components",
     items: [
-      { slug: "linkedin-composer", title: "LinkedInComposer", badge: "v0.1.0" },
-      { slug: "twitter-composer", title: "TwitterThreadComposer", badge: "v0.1.0" },
-      { slug: "email-composer", title: "EmailOutreachComposer", badge: "v0.1.0" },
-      { slug: "github-composer", title: "GitHubPRComposer", badge: "v0.1.0" },
+      { slug: "linkedin-composer", title: "LinkedInComposer", badge: "v0.1.3" },
+      { slug: "twitter-composer", title: "TwitterThreadComposer", badge: "v0.1.3" },
+      { slug: "email-composer", title: "EmailOutreachComposer", badge: "v0.1.3" },
+      { slug: "github-composer", title: "GitHubPRComposer", badge: "v0.1.3" },
       { slug: "compound-components", title: "Compound Components" },
     ],
   },
@@ -155,7 +156,7 @@ export function DocsView({ activeSlug, onSelectSlug }: DocsViewProps) {
       { label: "Zero runtime dependencies verified", completed: true },
     ],
     reviewers: ["theajmalrazaq", "agent-reviewer"],
-    labels: ["enhancement", "composers", "v0.1.0"],
+    labels: ["enhancement", "composers", "v0.1.3"],
   });
   const [docGithubStatus, setDocGithubStatus] = useState<ComposerStatus>("reviewing");
 
@@ -387,34 +388,17 @@ export function DocsView({ activeSlug, onSelectSlug }: DocsViewProps) {
                 </div>
 
                 {/* Install Tabs */}
-                <div className="space-y-4">
-                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center justify-between">
-                    <span>bun add agentcomposerui</span>
-                    <button
-                      onClick={() => handleCopy("inst-bun", "bun add agentcomposerui")}
-                      className="hover:text-zinc-400"
-                    >
-                      {copiedKey === "inst-bun" ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center justify-between">
-                    <span>npm install agentcomposerui</span>
-                    <button
-                      onClick={() => handleCopy("inst-npm", "npm install agentcomposerui")}
-                      className="hover:text-zinc-400"
-                    >
-                      {copiedKey === "inst-npm" ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                  </div>
+                <div className="space-y-3">
+                  <CodeBlock
+                    code="bun add agentcomposerui"
+                    language="bash"
+                    wrap={true}
+                  />
+                  <CodeBlock
+                    code="npm install agentcomposerui"
+                    language="bash"
+                    wrap={true}
+                  />
                 </div>
 
                 {/* Peer Dependencies */}
@@ -425,9 +409,12 @@ export function DocsView({ activeSlug, onSelectSlug }: DocsViewProps) {
                   <p className="text-xs text-zinc-500 mb-3">
                     Ensure you have React (&gt;=18) and Tailwind CSS configured in your repository:
                   </p>
-                  <div className="p-3 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono">
-                    "peerDependencies": &#123; "react": "&gt;=18", "react-dom": "&gt;=18" &#125;
-                  </div>
+                  <CodeBlock
+                    code={`"peerDependencies": { "react": ">=18", "react-dom": ">=18" }`}
+                    language="json"
+                    wrap={true}
+                    showCopy={false}
+                  />
                 </div>
 
                 {/* Import Base Styles */}
@@ -439,19 +426,11 @@ export function DocsView({ activeSlug, onSelectSlug }: DocsViewProps) {
                     Import the stylesheet once at your app root (e.g.{" "}
                     <code className="font-mono">app/layout.tsx</code>):
                   </p>
-                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center justify-between">
-                    <span>import "agentcomposerui/styles.css";</span>
-                    <button
-                      onClick={() => handleCopy("css-import", 'import "agentcomposerui/styles.css";')}
-                      className="hover:text-zinc-400"
-                    >
-                      {copiedKey === "css-import" ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                  </div>
+                  <CodeBlock
+                    code='import "agentcomposerui/styles.css";'
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
               </div>
             )}
@@ -472,23 +451,8 @@ export function DocsView({ activeSlug, onSelectSlug }: DocsViewProps) {
                   <h2 className="text-base font-bold text-zinc-900 dark:text-white">
                     Step 1: Import and render the component
                   </h2>
-                  <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                    <button
-                      onClick={() =>
-                        handleCopy(
-                          "qs-code",
-                          `import { useState } from "react";\nimport { LinkedInComposer, type LinkedInPostData, type ComposerStatus } from "agentcomposerui";\n\nexport function SocialAgentReview() {\n  const [post, setPost] = useState<LinkedInPostData>({\n    hook: "Excited to introduce our new AI agent architecture!",\n    body: "AgentComposerUI delivers interactive human-in-the-loop cards.",\n    callToAction: "Try it today!",\n    hashtags: ["#AI", "#OpenSource"]\n  });\n  const [status, setStatus] = useState<ComposerStatus>("reviewing");\n\n  return (\n    <LinkedInComposer\n      data={post}\n      status={status}\n      onChange={setPost}\n      onApprove={async (finalData) => {\n        await fetch("/api/publish", { method: "POST", body: JSON.stringify(finalData) });\n        setStatus("approved");\n      }}\n      onReject={async (feedback) => {\n        await fetch("/api/revise", { method: "POST", body: JSON.stringify({ feedback }) });\n        setStatus("streaming");\n      }}\n    />\n  );\n}`,
-                        )
-                      }
-                      className="absolute right-3 top-3 p-1.5 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                    >
-                      {copiedKey === "qs-code" ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                    <pre>{`import { useState } from "react";
+                  <CodeBlock
+                    code={`import { useState } from "react";
 import { LinkedInComposer, type LinkedInPostData, type ComposerStatus } from "agentcomposerui";
 
 export function SocialAgentReview() {
@@ -515,8 +479,10 @@ export function SocialAgentReview() {
       }}
     />
   );
-}`}</pre>
-                  </div>
+}`}
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
               </div>
             )}
@@ -526,7 +492,7 @@ export function SocialAgentReview() {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700">
-                      Ready in v0.1.0
+                      Ready in v0.1.3
                     </span>
                     <span className="text-xs text-zinc-400">Social Media Component</span>
                   </div>
@@ -639,8 +605,8 @@ export function SocialAgentReview() {
                       </div>
                     </div>
                   ) : (
-                    <div className="p-4 bg-zinc-950 font-mono text-xs text-zinc-200 overflow-x-auto">
-                      <pre>{`import { useState } from "react";
+                    <CodeBlock
+                      code={`import { useState } from "react";
 import { LinkedInComposer, type LinkedInPostData, type ComposerStatus } from "agentcomposerui";
 
 export function SocialReviewCard() {
@@ -667,8 +633,12 @@ export function SocialReviewCard() {
       }}
     />
   );
-}`}</pre>
-                    </div>
+}`}
+                      language="tsx"
+                      wrap={true}
+                      showCopy={false}
+                      className="border-0 rounded-none bg-zinc-950"
+                    />
                   )}
                 </div>
 
@@ -771,7 +741,7 @@ export function SocialReviewCard() {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700">
-                      Ready in v0.1.0
+                      Ready in v0.1.3
                     </span>
                     <span className="text-xs text-zinc-400">Social Media Component</span>
                   </div>
@@ -856,8 +826,8 @@ export function SocialReviewCard() {
                       </div>
                     </div>
                   ) : (
-                    <div className="p-4 bg-zinc-950 font-mono text-xs text-zinc-200 overflow-x-auto">
-                      <pre>{`import { useState } from "react";
+                    <CodeBlock
+                      code={`import { useState } from "react";
 import { TwitterThreadComposer, type TwitterThreadData, type ComposerStatus } from "agentcomposerui";
 
 export function TwitterAgentReview() {
@@ -886,8 +856,12 @@ export function TwitterAgentReview() {
       }}
     />
   );
-}`}</pre>
-                    </div>
+}`}
+                      language="tsx"
+                      wrap={true}
+                      showCopy={false}
+                      className="border-0 rounded-none bg-zinc-950"
+                    />
                   )}
                 </div>
 
@@ -903,8 +877,8 @@ export function TwitterAgentReview() {
                     </code>{" "}
                     with your LLM tools:
                   </p>
-                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-200 overflow-x-auto">
-                    <pre>{`import { twitterThreadJsonSchema } from "agentcomposerui";
+                  <CodeBlock
+                    code={`import { twitterThreadJsonSchema } from "agentcomposerui";
 
 export const twitterTool = {
   type: "function",
@@ -913,8 +887,10 @@ export const twitterTool = {
     description: "Generate a multi-tweet thread adhering to 280-char limits per tweet.",
     parameters: twitterThreadJsonSchema,
   },
-};`}</pre>
-                  </div>
+};`}
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
 
                 {/* Props Table */}
@@ -994,7 +970,7 @@ export const twitterTool = {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700">
-                      Ready in v0.1.0
+                      Ready in v0.1.3
                     </span>
                     <span className="text-xs text-zinc-400">Outreach & Newsletter Component</span>
                   </div>
@@ -1077,8 +1053,8 @@ export const twitterTool = {
                       </div>
                     </div>
                   ) : (
-                    <div className="p-4 bg-zinc-950 font-mono text-xs text-zinc-200 overflow-x-auto">
-                      <pre>{`import { useState } from "react";
+                    <CodeBlock
+                      code={`import { useState } from "react";
 import { EmailOutreachComposer, type EmailDraftData, type ComposerStatus } from "agentcomposerui";
 
 export function EmailAgentReview() {
@@ -1106,8 +1082,12 @@ export function EmailAgentReview() {
       }}
     />
   );
-}`}</pre>
-                    </div>
+}`}
+                      language="tsx"
+                      wrap={true}
+                      showCopy={false}
+                      className="border-0 rounded-none bg-zinc-950"
+                    />
                   )}
                 </div>
 
@@ -1116,8 +1096,8 @@ export function EmailAgentReview() {
                   <h2 className="text-base font-bold text-zinc-900 dark:text-white mb-2">
                     OpenAI & Claude Tool Schema
                   </h2>
-                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-200 overflow-x-auto">
-                    <pre>{`import { emailDraftJsonSchema } from "agentcomposerui";
+                  <CodeBlock
+                    code={`import { emailDraftJsonSchema } from "agentcomposerui";
 
 export const emailOutreachTool = {
   type: "function",
@@ -1126,8 +1106,10 @@ export const emailOutreachTool = {
     description: "Draft personalized cold outreach or newsletter message.",
     parameters: emailDraftJsonSchema,
   },
-};`}</pre>
-                  </div>
+};`}
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
 
                 {/* Props Table */}
@@ -1197,7 +1179,7 @@ export const emailOutreachTool = {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700">
-                      Ready in v0.1.0
+                      Ready in v0.1.3
                     </span>
                     <span className="text-xs text-zinc-400">Developer Agent Component</span>
                   </div>
@@ -1279,8 +1261,8 @@ export const emailOutreachTool = {
                       </div>
                     </div>
                   ) : (
-                    <div className="p-4 bg-zinc-950 font-mono text-xs text-zinc-200 overflow-x-auto">
-                      <pre>{`import { useState } from "react";
+                    <CodeBlock
+                      code={`import { useState } from "react";
 import { GitHubPRComposer, type GitHubPRData, type ComposerStatus } from "agentcomposerui";
 
 export function PRAgentReview() {
@@ -1309,8 +1291,12 @@ export function PRAgentReview() {
       }}
     />
   );
-}`}</pre>
-                    </div>
+}`}
+                      language="tsx"
+                      wrap={true}
+                      showCopy={false}
+                      className="border-0 rounded-none bg-zinc-950"
+                    />
                   )}
                 </div>
 
@@ -1319,8 +1305,8 @@ export function PRAgentReview() {
                   <h2 className="text-base font-bold text-zinc-900 dark:text-white mb-2">
                     OpenAI & Claude Tool Schema
                   </h2>
-                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-200 overflow-x-auto">
-                    <pre>{`import { gitHubPRJsonSchema } from "agentcomposerui";
+                  <CodeBlock
+                    code={`import { gitHubPRJsonSchema } from "agentcomposerui";
 
 export const gitHubPRTool = {
   type: "function",
@@ -1329,8 +1315,10 @@ export const gitHubPRTool = {
     description: "Create an automated pull request with title, checklist, and markdown diff.",
     parameters: gitHubPRJsonSchema,
   },
-};`}</pre>
-                  </div>
+};`}
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
 
                 {/* Props Table */}
@@ -1405,23 +1393,8 @@ export const gitHubPRTool = {
                   </p>
                 </div>
 
-                <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                  <button
-                    onClick={() =>
-                      handleCopy(
-                        "compound-code",
-                        `<LinkedInComposer.Root data={post} status={status} onApprove={handleApprove}>\n  <LinkedInComposer.Header>\n    <LinkedInComposer.Author name="Jane Doe" title="Tech Founder" />\n    <LinkedInComposer.StageIndicator />\n  </LinkedInComposer.Header>\n\n  <LinkedInComposer.Editor />\n  <LinkedInComposer.HashtagBar />\n  <LinkedInComposer.MediaDropzone />\n  <LinkedInComposer.Preview />\n\n  <LinkedInComposer.Actions>\n    <LinkedInComposer.CharacterCount limit={3000} />\n    <div className="flex gap-2">\n      <LinkedInComposer.RejectButton />\n      <LinkedInComposer.ApproveButton />\n    </div>\n  </LinkedInComposer.Actions>\n</LinkedInComposer.Root>`,
-                      )
-                    }
-                    className="absolute right-3 top-3 p-1.5 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                  >
-                    {copiedKey === "compound-code" ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
-                  </button>
-                  <pre>{`<LinkedInComposer.Root data={post} status={status} onApprove={handleApprove}>
+                <CodeBlock
+                  code={`<LinkedInComposer.Root data={post} status={status} onApprove={handleApprove}>
   <LinkedInComposer.Header>
     <LinkedInComposer.Author name="Jane Doe" title="Tech Founder" />
     <LinkedInComposer.StageIndicator />
@@ -1439,8 +1412,10 @@ export const gitHubPRTool = {
       <LinkedInComposer.ApproveButton />
     </div>
   </LinkedInComposer.Actions>
-</LinkedInComposer.Root>`}</pre>
-                </div>
+</LinkedInComposer.Root>`}
+                  language="tsx"
+                  wrap={true}
+                />
               </div>
             )}
 
@@ -1456,8 +1431,8 @@ export const gitHubPRTool = {
                   </p>
                 </div>
 
-                <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                  <pre>{`const {
+                <CodeBlock
+                  code={`const {
   data,
   status,
   isLoading,
@@ -1478,8 +1453,10 @@ export const gitHubPRTool = {
   onReject: async (feedback) => {
     // Send revision instructions to agent
   },
-});`}</pre>
-                </div>
+});`}
+                  language="tsx"
+                  wrap={true}
+                />
               </div>
             )}
 
@@ -1494,8 +1471,8 @@ export const gitHubPRTool = {
                   </p>
                 </div>
 
-                <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                  <pre>{`import OpenAI from "openai";
+                <CodeBlock
+                  code={`import OpenAI from "openai";
 import { linkedInPostJsonSchema } from "agentcomposerui";
 
 const openai = new OpenAI();
@@ -1513,8 +1490,10 @@ const response = await openai.chat.completions.create({
       },
     },
   ],
-});`}</pre>
-                </div>
+});`}
+                  language="tsx"
+                  wrap={true}
+                />
               </div>
             )}
 
@@ -1529,23 +1508,8 @@ const response = await openai.chat.completions.create({
                   </p>
                 </div>
 
-                <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                  <button
-                    onClick={() =>
-                      handleCopy(
-                        "anthropic-code",
-                        `import Anthropic from "@anthropic-ai/sdk";\nimport { linkedInPostJsonSchema } from "agentcomposerui";\n\nconst anthropic = new Anthropic();\n\nconst response = await anthropic.messages.create({\n  model: "claude-3-5-sonnet-20241022",\n  max_tokens: 1024,\n  tools: [\n    {\n      name: "compose_linkedin_post",\n      description: "Draft an engaging LinkedIn post with hook, body, and tags.",\n      input_schema: linkedInPostJsonSchema,\n    },\n  ],\n  messages: [{ role: "user", content: "Draft a post about AI agent evaluation." }],\n});`,
-                      )
-                    }
-                    className="absolute right-3 top-3 p-1.5 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                  >
-                    {copiedKey === "anthropic-code" ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
-                  </button>
-                  <pre>{`import Anthropic from "@anthropic-ai/sdk";
+                <CodeBlock
+                  code={`import Anthropic from "@anthropic-ai/sdk";
 import { linkedInPostJsonSchema } from "agentcomposerui";
 
 const anthropic = new Anthropic();
@@ -1561,8 +1525,10 @@ const response = await anthropic.messages.create({
     },
   ],
   messages: [{ role: "user", content: "Draft a post about AI agent evaluation." }],
-});`}</pre>
-                </div>
+});`}
+                  language="tsx"
+                  wrap={true}
+                />
               </div>
             )}
 
@@ -1603,23 +1569,8 @@ const response = await anthropic.messages.create({
                   <h2 className="text-base font-bold text-zinc-900 dark:text-white">
                     Example: Gemini API with Google GenAI SDK
                   </h2>
-                  <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                    <button
-                      onClick={() =>
-                        handleCopy(
-                          "gemini-code",
-                          `import { GoogleGenAI, Type } from "@google/genai";\nimport { linkedInPostJsonSchema } from "agentcomposerui";\n\nconst ai = new GoogleGenAI();\n\nconst response = await ai.models.generateContent({\n  model: "gemini-2.5-flash",\n  contents: "Write a high-engagement LinkedIn post about our new agent framework.",\n  config: {\n    tools: [\n      {\n        functionDeclarations: [\n          {\n            name: "compose_linkedin_post",\n            description: "Draft an engaging LinkedIn post with hook, body, and tags.",\n            parameters: linkedInPostJsonSchema,\n          },\n        ],\n      },\n    ],\n  },\n});\n\n// Extract the structured post data\nconst functionCall = response.functionCalls?.[0];\nif (functionCall && functionCall.name === "compose_linkedin_post") {\n  const postData = functionCall.args; // Passes directly to <LinkedInComposer data={postData} />\n}`,
-                        )
-                      }
-                      className="absolute right-3 top-3 p-1.5 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                    >
-                      {copiedKey === "gemini-code" ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                    <pre>{`import { GoogleGenAI, Type } from "@google/genai";
+                  <CodeBlock
+                    code={`import { GoogleGenAI, Type } from "@google/genai";
 import { linkedInPostJsonSchema } from "agentcomposerui";
 
 const ai = new GoogleGenAI();
@@ -1649,8 +1600,10 @@ if (functionCall && functionCall.name === "compose_linkedin_post") {
   // Feed into your UI state:
   // setDraft(postData);
   // setStatus("reviewing");
-}`}</pre>
-                  </div>
+}`}
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
               </div>
             )}
@@ -1677,23 +1630,8 @@ if (functionCall && functionCall.name === "compose_linkedin_post") {
                   <h2 className="text-base font-bold text-zinc-900 dark:text-white">
                     1. Server Action / Route Handler with Zod Schema
                   </h2>
-                  <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                    <button
-                      onClick={() =>
-                        handleCopy(
-                          "ai-sdk-server",
-                          `import { streamText, tool } from "ai";\nimport { openai } from "@ai-sdk/openai";\nimport { linkedInPostSchema } from "agentcomposerui";\n\nexport async function POST(req: Request) {\n  const { messages } = await req.json();\n\n  const result = streamText({\n    model: openai("gpt-4o"),\n    messages,\n    tools: {\n      composeLinkedInPost: tool({\n        description: "Draft a structured LinkedIn post.",\n        parameters: linkedInPostSchema,\n        execute: async (postData) => {\n          // Return draft to client for human review\n          return { status: "ready_for_review", draft: postData };\n        },\n      }),\n    },\n  });\n\n  return result.toDataStreamResponse();\n}`,
-                        )
-                      }
-                      className="absolute right-3 top-3 p-1.5 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                    >
-                      {copiedKey === "ai-sdk-server" ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                    <pre>{`import { streamText, tool } from "ai";
+                  <CodeBlock
+                    code={`import { streamText, tool } from "ai";
 import { openai } from "@ai-sdk/openai";
 import { linkedInPostSchema } from "agentcomposerui";
 
@@ -1715,31 +1653,18 @@ export async function POST(req: Request) {
   });
 
   return result.toDataStreamResponse();
-}`}</pre>
-                  </div>
+}`}
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
 
                 <div className="space-y-4">
                   <h2 className="text-base font-bold text-zinc-900 dark:text-white">
                     2. Client Chat Component with &lt;LinkedInComposer /&gt;
                   </h2>
-                  <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                    <button
-                      onClick={() =>
-                        handleCopy(
-                          "ai-sdk-client",
-                          `"use client";\n\nimport { useChat } from "ai/react";\nimport { LinkedInComposer } from "agentcomposerui";\n\nexport function AgentChat() {\n  const { messages, addToolResult } = useChat();\n\n  return (\n    <div className="space-y-4">\n      {messages.map((message) => (\n        <div key={message.id}>\n          {message.content}\n          {message.toolInvocations?.map((toolInvocation) => {\n            if (toolInvocation.toolName === "composeLinkedInPost") {\n              const isCompleted = "result" in toolInvocation;\n              const draft = isCompleted ? toolInvocation.result.draft : toolInvocation.args;\n\n              return (\n                <div key={toolInvocation.toolCallId} className="my-4">\n                  <LinkedInComposer\n                    data={draft}\n                    status={isCompleted ? "reviewing" : "streaming"}\n                    onApprove={async (approvedData) => {\n                      addToolResult({\n                        toolCallId: toolInvocation.toolCallId,\n                        result: { approved: true, post: approvedData },\n                      });\n                    }}\n                    onReject={async (feedback) => {\n                      addToolResult({\n                        toolCallId: toolInvocation.toolCallId,\n                        result: { approved: false, revisionFeedback: feedback },\n                      });\n                    }}\n                  />\n                </div>\n              );\n            }\n            return null;\n          })}\n        </div>\n      ))}\n    </div>\n  );\n}`,
-                        )
-                      }
-                      className="absolute right-3 top-3 p-1.5 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                    >
-                      {copiedKey === "ai-sdk-client" ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                    <pre>{`"use client";
+                  <CodeBlock
+                    code={`"use client";
 
 import { useChat } from "ai/react";
 import { LinkedInComposer } from "agentcomposerui";
@@ -1782,8 +1707,10 @@ export function AgentChat() {
       ))}
     </div>
   );
-}`}</pre>
-                  </div>
+}`}
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
               </div>
             )}
@@ -1810,23 +1737,8 @@ export function AgentChat() {
                   <h2 className="text-base font-bold text-zinc-900 dark:text-white">
                     Example: useCopilotAction with &lt;LinkedInComposer /&gt;
                   </h2>
-                  <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                    <button
-                      onClick={() =>
-                        handleCopy(
-                          "copilot-code",
-                          `import { useCopilotAction } from "@copilotkit/react-core";\nimport { LinkedInComposer, type LinkedInPostData } from "agentcomposerui";\n\nexport function SocialAgentCopilot() {\n  useCopilotAction({\n    name: "composeLinkedInPost",\n    description: "Generate a drafted LinkedIn post for user review.",\n    parameters: [\n      { name: "hook", type: "string", description: "Catchy opening line.", required: true },\n      { name: "body", type: "string", description: "Body of the post.", required: true },\n      { name: "callToAction", type: "string", description: "CTA line.", required: false },\n      { name: "hashtags", type: "string[]", description: "List of hashtags.", required: false },\n    ],\n    render: ({ status, args, handler }) => {\n      const postData: LinkedInPostData = {\n        hook: args.hook || "",\n        body: args.body || "",\n        callToAction: args.callToAction,\n        hashtags: args.hashtags || [],\n      };\n\n      return (\n        <div className="p-2">\n          <LinkedInComposer\n            data={postData}\n            status={status === "executing" ? "streaming" : "reviewing"}\n            onApprove={async (finalData) => {\n              await handler({ approved: true, post: finalData });\n            }}\n            onReject={async (feedback) => {\n              await handler({ approved: false, feedback });\n            }}\n          />\n        </div>\n      );\n    },\n  });\n\n  return <div>Your application content...</div>;\n}`,
-                        )
-                      }
-                      className="absolute right-3 top-3 p-1.5 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                    >
-                      {copiedKey === "copilot-code" ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
-                    <pre>{`import { useCopilotAction } from "@copilotkit/react-core";
+                  <CodeBlock
+                    code={`import { useCopilotAction } from "@copilotkit/react-core";
 import { LinkedInComposer, type LinkedInPostData } from "agentcomposerui";
 
 export function SocialAgentCopilot() {
@@ -1865,8 +1777,10 @@ export function SocialAgentCopilot() {
   });
 
   return <div>Your application content...</div>;
-}`}</pre>
-                  </div>
+}`}
+                    language="tsx"
+                    wrap={true}
+                  />
                 </div>
               </div>
             )}
@@ -1882,8 +1796,8 @@ export function SocialAgentCopilot() {
                   </p>
                 </div>
 
-                <div className="relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-xs font-mono text-zinc-200 overflow-x-auto">
-                  <pre>{`:root {
+                <CodeBlock
+                  code={`:root {
   --acu-primary: 240 5.9% 10%;       /* Brand action (crisp black in light mode) */
   --acu-radius: 0.75rem;             /* Corner radius */
   --acu-background: 0 0% 100%;       /* Surface background */
@@ -1896,8 +1810,10 @@ export function SocialAgentCopilot() {
   --acu-foreground: 0 0% 98%;
   --acu-primary: 0 0% 98%;           /* Pure crisp white in dark mode */
   --acu-border: 240 3.7% 15.9%;
-}`}</pre>
-                </div>
+}`}
+                  language="css"
+                  wrap={true}
+                />
               </div>
             )}
 

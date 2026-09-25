@@ -16,7 +16,7 @@ export function AnnouncementBanner({ onExplore }: AnnouncementBannerProps) {
       <div className="flex items-center gap-x-3 mx-auto">
         <span className="flex items-center gap-1 font-semibold text-zinc-900 dark:text-zinc-100 bg-zinc-200/70 dark:bg-zinc-800 px-2 py-0.5 rounded-full border border-zinc-300 dark:border-zinc-700">
           <Sparkles className="w-3 h-3" />
-          <span>v0.1.0 Released</span>
+          <span>v0.1.3 Released</span>
         </span>
         <span className="text-zinc-700 dark:text-zinc-300 hidden sm:inline">
           AgentComposerUI: Drop-in Human-in-the-Loop composers for AI agents with OpenAI, Claude &

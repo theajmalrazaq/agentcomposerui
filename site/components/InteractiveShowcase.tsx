@@ -15,6 +15,7 @@ import {
 import { LinkedInComposer } from "../../src/components/linkedin/linkedin-composer";
 import type { LinkedInPostData } from "../../src/schemas/linkedin";
 import type { ComposerStatus } from "../../src/types";
+import { CodeBlock } from "./CodeBlock";
 
 const PRESETS: Record<string, LinkedInPostData> = {
   "Open Source Launch": {
@@ -202,44 +203,40 @@ export function SocialAgentReview() {
           <div className="flex items-center gap-1 bg-zinc-200/60 dark:bg-zinc-800 p-0.5 rounded-lg text-xs font-medium">
             <button
               onClick={() => setActiveTab("preview")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${
-                activeTab === "preview"
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${activeTab === "preview"
                   ? "bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white shadow-2xs font-semibold"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-              }`}
+                }`}
             >
               <Eye className="w-3.5 h-3.5" />
               <span>Preview</span>
             </button>
             <button
               onClick={() => setActiveTab("code")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${
-                activeTab === "code"
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${activeTab === "code"
                   ? "bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white shadow-2xs font-semibold"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-              }`}
+                }`}
             >
               <Code2 className="w-3.5 h-3.5" />
               <span>Code</span>
             </button>
             <button
               onClick={() => setActiveTab("schema")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${
-                activeTab === "schema"
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${activeTab === "schema"
                   ? "bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white shadow-2xs font-semibold"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-              }`}
+                }`}
             >
               <Braces className="w-3.5 h-3.5" />
               <span>Schema</span>
             </button>
             <button
               onClick={() => setActiveTab("state")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${
-                activeTab === "state"
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${activeTab === "state"
                   ? "bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white shadow-2xs font-semibold"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-              }`}
+                }`}
             >
               <Activity className="w-3.5 h-3.5" />
               <span>State</span>
@@ -253,22 +250,20 @@ export function SocialAgentReview() {
               <button
                 onClick={() => setViewport("desktop")}
                 title="Desktop Viewport"
-                className={`p-1 rounded-md transition-colors cursor-pointer ${
-                  viewport === "desktop"
+                className={`p-1 rounded-md transition-colors cursor-pointer ${viewport === "desktop"
                     ? "bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white shadow-2xs"
                     : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
-                }`}
+                  }`}
               >
                 <Monitor className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => setViewport("mobile")}
                 title="Mobile Viewport"
-                className={`p-1 rounded-md transition-colors cursor-pointer ${
-                  viewport === "mobile"
+                className={`p-1 rounded-md transition-colors cursor-pointer ${viewport === "mobile"
                     ? "bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white shadow-2xs"
                     : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
-                }`}
+                  }`}
               >
                 <Smartphone className="w-3.5 h-3.5" />
               </button>
@@ -303,9 +298,8 @@ export function SocialAgentReview() {
         <div className="p-4 sm:p-8 min-h-[560px] flex items-center justify-center bg-reui-dots bg-zinc-50/40 dark:bg-zinc-950/40">
           {activeTab === "preview" && (
             <div
-              className={`transition-all duration-300 w-full ${
-                viewport === "mobile" ? "max-w-sm" : "max-w-2xl"
-              }`}
+              className={`transition-all duration-300 w-full ${viewport === "mobile" ? "max-w-sm" : "max-w-2xl"
+                }`}
             >
               <LinkedInComposer
                 data={postData}
@@ -322,54 +316,26 @@ export function SocialAgentReview() {
           )}
 
           {activeTab === "code" && (
-            <div className="w-full max-w-3xl relative">
-              <div className="flex items-center justify-between px-4 py-2 bg-zinc-900 text-zinc-300 text-xs rounded-t-xl border border-zinc-800 border-b-0 font-mono">
-                <span>components/agent-composer.tsx</span>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(reactCodeSnippet);
-                    setCopiedCode(true);
-                    setTimeout(() => setCopiedCode(false), 2000);
-                  }}
-                  className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
-                >
-                  {copiedCode ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  ) : (
-                    <Copy className="w-3.5 h-3.5" />
-                  )}
-                  <span>{copiedCode ? "Copied" : "Copy"}</span>
-                </button>
-              </div>
-              <pre className="p-4 bg-zinc-950 text-zinc-100 rounded-b-xl border border-zinc-800 text-xs font-mono overflow-x-auto leading-relaxed max-h-[460px]">
-                <code>{reactCodeSnippet}</code>
-              </pre>
+            <div className="w-full max-w-3xl">
+              <CodeBlock
+                code={reactCodeSnippet}
+                language="tsx"
+                filename="components/agent-composer.tsx"
+                maxHeight="460px"
+                wrap={true}
+              />
             </div>
           )}
 
           {activeTab === "schema" && (
-            <div className="w-full max-w-3xl relative">
-              <div className="flex items-center justify-between px-4 py-2 bg-zinc-900 text-zinc-300 text-xs rounded-t-xl border border-zinc-800 border-b-0 font-mono">
-                <span>openai-tool-definition.json</span>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(jsonSchemaSnippet);
-                    setCopiedSchema(true);
-                    setTimeout(() => setCopiedSchema(false), 2000);
-                  }}
-                  className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
-                >
-                  {copiedSchema ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  ) : (
-                    <Copy className="w-3.5 h-3.5" />
-                  )}
-                  <span>{copiedSchema ? "Copied" : "Copy"}</span>
-                </button>
-              </div>
-              <pre className="p-4 bg-zinc-950 text-zinc-100 rounded-b-xl border border-zinc-800 text-xs font-mono overflow-x-auto leading-relaxed max-h-[460px]">
-                <code>{jsonSchemaSnippet}</code>
-              </pre>
+            <div className="w-full max-w-3xl">
+              <CodeBlock
+                code={jsonSchemaSnippet}
+                language="json"
+                filename="openai-tool-definition.json"
+                maxHeight="460px"
+                wrap={true}
+              />
             </div>
           )}
 
@@ -380,13 +346,12 @@ export function SocialAgentReview() {
                   Composer State Inspector
                 </span>
                 <span
-                  className={`px-2 py-0.5 rounded-md text-xs font-semibold capitalize ${
-                    status === "approved"
+                  className={`px-2 py-0.5 rounded-md text-xs font-semibold capitalize ${status === "approved"
                       ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
                       : status === "streaming"
                         ? "bg-amber-500/10 text-amber-600 border border-amber-500/20"
                         : "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700"
-                  }`}
+                    }`}
                 >
                   Status: {status}
                 </span>
@@ -406,9 +371,13 @@ export function SocialAgentReview() {
                 <p className="text-xs font-semibold text-zinc-500 mb-1.5 uppercase tracking-wide">
                   Current Draft Payload (JSON):
                 </p>
-                <pre className="p-3 bg-zinc-100 dark:bg-zinc-950 rounded-lg text-[11px] font-mono text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-zinc-800/80 max-h-48 overflow-y-auto">
-                  {JSON.stringify(postData, null, 2)}
-                </pre>
+                <CodeBlock
+                  code={JSON.stringify(postData, null, 2)}
+                  language="json"
+                  maxHeight="200px"
+                  wrap={true}
+                  showCopy={true}
+                />
               </div>
             </div>
           )}
@@ -423,11 +392,10 @@ export function SocialAgentReview() {
                 <button
                   key={key}
                   onClick={() => handleSelectPreset(key)}
-                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
-                    activePreset === key
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${activePreset === key
                       ? "bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-2xs"
                       : "bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-                  }`}
+                    }`}
                 >
                   {key}
                 </button>

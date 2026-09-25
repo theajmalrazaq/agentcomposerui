@@ -17,7 +17,8 @@ import {
   CopilotKitIcon,
   VercelIcon,
 } from "./BrandIcons";
-import heroBg from "../assets/hero-bg.jpg";
+import heroBgWebp from "../assets/hero-bg.webp";
+import heroBgJpg from "../assets/hero-bg.jpg";
 import type { SiteView } from "../types";
 
 interface HeroSectionProps {
@@ -71,12 +72,17 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
     <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 isolate">
       {/* Minimalist Landscape Hero Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-        <img
-          src={heroBg}
-          alt="Minimalist landscape hero background with rocky mountain peaks and moon"
-          className="w-full h-full object-cover object-[center_40%] dark:brightness-[0.38] dark:contrast-[1.12] dark:saturate-[0.8] transition-all duration-500"
-          loading="eager"
-        />
+        <picture>
+          <source srcSet={heroBgWebp} type="image/webp" />
+          <img
+            src={heroBgJpg}
+            alt="Minimalist landscape hero background with rocky mountain peaks and moon"
+            className="w-full h-full object-cover object-[center_40%] dark:brightness-[0.38] dark:contrast-[1.12] dark:saturate-[0.8] transition-all duration-500"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
 
         {/* Readability Overlay Gradient - Tuned for crystal-clear typography in both light and dark mode */}
         <div
@@ -100,7 +106,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
-          <span className="font-semibold text-zinc-900 dark:text-white">v0.1.0 Released</span>
+          <span className="font-semibold text-zinc-900 dark:text-white">v0.1.3 Released</span>
           <span className="text-zinc-300 dark:text-zinc-700">|</span>
           <span>Human-in-the-Loop AI Composers</span>
           <ArrowRight className="w-3 h-3 text-zinc-400" />

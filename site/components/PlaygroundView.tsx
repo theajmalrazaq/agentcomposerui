@@ -67,7 +67,7 @@ export function PlaygroundView() {
       { label: "Updated component directory and documentation", completed: true },
     ],
     reviewers: ["theajmalrazaq", "agent-reviewer"],
-    labels: ["enhancement", "composers", "v0.1.0"],
+    labels: ["enhancement", "composers", "v0.1.3"],
   });
 
   const [authorName, setAuthorName] = useState("John Doe");

@@ -34,7 +34,7 @@ export function Navbar({
             {/* Logo */}
             <Logo showText size={32} />
             <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
-              v0.1.0
+              v0.1.3
             </span>
           </button>
 
