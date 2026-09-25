@@ -84,20 +84,22 @@ module.exports = {
 Import only what you need:
 
 ```tsx
-// LinkedIn Post Composer
-import { LinkedInComposer, linkedInPostSchema } from "agentcomposerui";
+// UI Components (Client-side)
+import {
+  LinkedInComposer,
+  TwitterThreadComposer,
+  EmailOutreachComposer,
+  GitHubPRComposer,
+  useComposerState,
+} from "agentcomposerui";
 
-// Twitter / X Thread Composer
-import { TwitterThreadComposer, twitterThreadSchema } from "agentcomposerui";
-
-// Email & Outreach Composer
-import { EmailOutreachComposer, emailDraftSchema } from "agentcomposerui";
-
-// GitHub PR Draft Composer
-import { GitHubPRComposer, gitHubPRSchema } from "agentcomposerui";
-
-// State Management Hook
-import { useComposerState } from "agentcomposerui";
+// Pure Zod Schemas (Server-side API routes & LLM Tools)
+import {
+  linkedInPostSchema,
+  twitterThreadSchema,
+  emailDraftSchema,
+  gitHubPRSchema,
+} from "agentcomposerui/schemas";
 ```
 
 ---

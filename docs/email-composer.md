@@ -58,7 +58,7 @@ export function Example() {
 
 ```typescript
 import { z } from "zod";
-import { emailDraftSchema } from "agentcomposerui";
+import { emailDraftSchema } from "agentcomposerui/schemas";
 
 export const emailDraftSchema = z.object({
   to: z.string().email(),

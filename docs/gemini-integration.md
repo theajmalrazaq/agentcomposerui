@@ -4,7 +4,7 @@ Use AgentComposerUI schemas with Google Gemini 2.5 and Function Declarations.
 
 ```typescript
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { linkedInPostJsonSchema } from "agentcomposerui";
+import { linkedInPostJsonSchema } from "agentcomposerui/schemas";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({

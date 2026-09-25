@@ -13,7 +13,7 @@ bun add agentcomposerui openai
 
 ```typescript
 import OpenAI from "openai";
-import { linkedInPostJsonSchema } from "agentcomposerui";
+import { linkedInPostJsonSchema } from "agentcomposerui/schemas";
 
 const openai = new OpenAI();
 

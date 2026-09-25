@@ -56,7 +56,7 @@ export function Example() {
 
 ```typescript
 import { z } from "zod";
-import { linkedInPostSchema } from "agentcomposerui";
+import { linkedInPostSchema } from "agentcomposerui/schemas";
 
 // Schema definition:
 export const linkedInPostSchema = z.object({

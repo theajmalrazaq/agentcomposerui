@@ -67,7 +67,7 @@ export function Example() {
 
 ```typescript
 import { z } from "zod";
-import { twitterThreadSchema, tweetItemSchema } from "agentcomposerui";
+import { twitterThreadSchema, tweetItemSchema } from "agentcomposerui/schemas";
 
 export const tweetItemSchema = z.object({
   id: z.string(),

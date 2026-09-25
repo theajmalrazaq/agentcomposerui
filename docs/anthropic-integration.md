@@ -6,7 +6,7 @@ AgentComposerUI tool schemas can be plugged directly into Anthropic Claude tool 
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
-import { linkedInPostJsonSchema } from "agentcomposerui";
+import { linkedInPostJsonSchema } from "agentcomposerui/schemas";
 
 const anthropic = new Anthropic();
 

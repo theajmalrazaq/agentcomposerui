@@ -60,7 +60,7 @@ export function Example() {
 
 ```typescript
 import { z } from "zod";
-import { gitHubPRSchema, gitHubChecklistItemSchema } from "agentcomposerui";
+import { gitHubPRSchema, gitHubChecklistItemSchema } from "agentcomposerui/schemas";
 
 export const gitHubChecklistItemSchema = z.object({
   label: z.string(),

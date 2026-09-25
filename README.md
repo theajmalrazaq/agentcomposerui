@@ -78,12 +78,29 @@ If using Tailwind v4 in CSS:
 
 ---
 
-## LLM Integration Example
+## LLM & Server Integration
 
-### OpenAI Tool Definition
+> **Next.js & Server Environments**: Always import schemas and types from `"agentcomposerui/schemas"` in server environments (API routes, Server Actions, edge functions) to avoid bundling React client components. Import UI components from `"agentcomposerui"` inside client components (`"use client"`).
+
+### Vercel AI SDK Tool
 
 ```ts
-import { linkedInPostJsonSchema } from "agentcomposerui";
+import { tool } from "ai";
+import { linkedInPostSchema, type LinkedInPostData } from "agentcomposerui/schemas";
+
+export const linkedInTool = tool({
+  description: "Draft an engaging LinkedIn post with hook, body, CTA, and hashtags.",
+  parameters: linkedInPostSchema,
+  execute: async (postData: LinkedInPostData) => {
+    return { success: true, draft: postData };
+  },
+});
+```
+
+### OpenAI Function Calling
+
+```ts
+import { linkedInPostJsonSchema } from "agentcomposerui/schemas";
 
 export const postComposerTool = {
   type: "function",
@@ -98,7 +115,7 @@ export const postComposerTool = {
 ### Anthropic Claude Tool Definition
 
 ```ts
-import { linkedInPostJsonSchema } from "agentcomposerui";
+import { linkedInPostJsonSchema } from "agentcomposerui/schemas";
 
 export const postComposerTool = {
   name: "compose_linkedin_post",
